@@ -1,0 +1,137 @@
+a1)Make 2 classes: 
+a)Big Boss (ME)
+b)Customer
+
+2)Big boss: 
+a)Add items
+b)Update items (adjust quantity of stock)
+c)Delete items
+d)Look up items
+e)View all the items
+f)View all the members (including usernames and passwords)
+g)View order list for customers 
+h)View cancelled order list
+i)View money in the business
+
+Has to be made when an account or an item has been entered in:
+j)See customers shopping history
+k)See reviews for each item (also rate)
+
+3)Customer:
+a)Create an account
+
+After logging in:
+b)Choose a category
+c)Pick an item from a category
+d)Add to cart
+e)View cart at anytime
+f)View e-wallet at anytime
+g)Go to checkout
+h)Make a purchase
+i)Deny order if there are insuffient funds
+j)View only your purchase history
+k)Leave a review (also rate)
+l)View reviews of others
+m)When quantity reaches 0 send "Sold out" message
+n)Cancel order
+
+4)Categories:
+a)Gaming
+b)Posters
+c)Blu-ray
+d)Comics
+e)CD's
+
+5)In the MySql tables:
+a)item_ID
+b)title
+c)price
+d)quantity
+
+6)MySql [tables]:
+a)Gaming [Gaming]
+b)Posters [Posters]
+c)Blu-ray [Blu_ray]
+d)Comics [Comics]
+e)CD's [CDs]
+
+f)members (including usernames and passwords)
+g)order list (After checking out)
+h)cancelled order list
+i)transaction list (How much money the business is making)
+
+Has to be made when an account or an item has been entered in:
+j)See customers shopping history
+k)See reviews for each item
+
+7)CheckOut:
+a)Delivery choice:
+-Standard: $10 (7-21 days)
+-Priority: $40 (2-5 days)
+b)See balance
+c)Finalize
+d)Update transactions list
+e)Enter customer order list
+
+8)Make a receipt (to a text document):
+a)Name of the customer
+b)Address
+c)total of item(s)
+d)Purchase Date
+e)Delivery Date
+f)Deduct from e-wallet
+
+------------------In MySql------------------------
+database: animeonline
+
+mysql> create table [All categories](
+    -> item_ID int not null,
+    -> Title varchar(50) not null,
+    -> Price$ int not null,
+    -> Quantity int not null,
+    -> primary key (item_ID));
+Query OK, 0 rows affected (0.60 sec)
+
+mysql> create table Members(
+    -> user_ID int not null,
+    -> userName varchar(50) not null,
+    -> FullName varchar(50) not null,
+    -> email varchar(100) not null,
+    -> password varchar(50) not null,
+    -> address varchar(100) not null,
+    -> PhoneNumber varchar(15),
+    -> E_Wallet$ int not null,
+    -> primary key (user_ID));
+Query OK, 0 rows affected (0.49 sec)
+
+mysql> create table Order_List( //No primary key, might have more than one of them
+    -> item_ID int not null,
+    -> howMany int not null
+    -> Title varchar(50) not null,
+    -> user_ID int not null,
+    -> userName varchar(50) not null,
+    -> OrderDate Date,
+    -> DeliveryDate Date);
+Query OK, 0 rows affected (0.55 sec)
+
+mysql> create table Cancelled_Order_List( //No primary key, might have more than one of them
+    -> item_ID int not null,
+    -> howMany into not null,
+    -> Title varchar(50) not null,
+    -> user_ID int not null,
+    -> userName varchar(50) not null,
+    -> OrderDate Date,
+    -> CancelledDate Date);
+Query OK, 0 rows affected (0.45 sec)
+
+mysql> create table Money_Made(
+    -> Money$ int not null);
+Query OK, 0 rows affected (0.54 sec)
+
+create table user[user_ID](
+item_ID int not null,
+Title varchar(50) not null,
+howMany int not null,
+Price$ int not null,
+PurchaseDate Date
+PaidFor varchar(10) not null);
